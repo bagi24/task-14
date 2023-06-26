@@ -1,0 +1,110 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.users {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.user-form {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 5px;
+}
+
+.btn-addUser {
+  padding: 10px 16px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.copmleted-element {
+  padding: 8px;
+  background-color: #f9f9f9;
+  border: 1px solid greenyellow;
+  border-radius: 4px;
+  margin-bottom: 2px;
+  width: 300px;
+}
+
+.btn-delete {
+  padding: 4px 8px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+.btn-uncompleted {
+  padding: 4px 8px;
+  background-color: #ff9800;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+.user-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  background-color: #f9f9f9;
+  border: 3px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 2px;
+  width: 300px;
+}
+
+.btn-delete {
+  padding: 4px 8px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+.btn-complete {
+  padding: 4px 8px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+.conteiner {
+  display: flex;
+}
+
+.done {
+  margin-left: 50px;
+  background-color: rgb(157, 221, 157);
+  border: 3px solid #ccc;
+}
+
+.toBeperformed {
+  background-color: #f5f58f;
+  border: 3px solid #ccc;
+}
