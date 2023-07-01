@@ -1,9 +1,12 @@
 import React, { useState, useCallback } from "react";
 import { UserItem } from "./UserItem";
+import { UserItemInProgress } from "./UserItemInProgress";
+import { UserItemCompleted } from "./UserItemCompleted";
 
 const UsersList = () => {
   const [inputValue, setInputValue] = useState("");
   const [users, setUsers] = useState([]);
+  const [inProgress, setInProgress] = useState([]);
   const [completed, setCompleted] = useState([]);
 
   const handleChange = useCallback((event) => {
@@ -25,10 +28,18 @@ const UsersList = () => {
 
   const handleRemoveUser = useCallback((id) => {
     setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
+    setInProgress((prevUsers) => prevUsers.filter((user) => user.id !== id));
+    setCompleted((prevUsers) => prevUsers.filter((user) => user.id !== id));
+  }, []);
+
+  const handleProgress = useCallback((user) => {
+    setUsers((prevUsers) => prevUsers.filter((u) => u.id !== user.id));
+
+    setInProgress((prevInProgress) => [...prevInProgress, user]);
   }, []);
 
   const handleComplete = useCallback((user) => {
-    setUsers((prevUsers) => prevUsers.filter((u) => u.id !== user.id));
+    setInProgress((prevUsers) => prevUsers.filter((u) => u.id !== user.id));
     setCompleted((prevCompleted) => [...prevCompleted, user]);
   }, []);
 
@@ -54,9 +65,24 @@ const UsersList = () => {
 
       <div className="conteiner">
         <div className="toBeperformed">
-          <p> შესასრულებელი დავალება </p>
-          {users.map((user, index) => (
+          <p className="todoTitle"> შესასრულებელი დავალება </p>
+          {users.map((user) => (
             <UserItem
+              key={user.id}
+              name={user.name}
+              id={user.id}
+              actionRemove={handleRemoveUser}
+              actionProgress={handleProgress}
+              completed={completed}
+              user={user}
+            />
+          ))}
+        </div>
+
+        <div className="inProgress">
+          <p className="inProgressTitle">დავალება შესრულების პროცესში</p>
+          {inProgress.map((user) => (
+            <UserItemInProgress
               key={user.id}
               name={user.name}
               id={user.id}
@@ -69,32 +95,18 @@ const UsersList = () => {
         </div>
 
         <div className="done ">
-          <p> შესრულებული დავალება</p>
-          {completed.map((user) => {
-            return (
-              <div key={user.id} className="copmleted-element">
-                {user.name}
-                <button
-                  className="btn-delete"
-                  onClick={() => {
-                    const updateDelete = completed.filter(
-                      (u) => u.id !== user.id
-                    );
-
-                    setCompleted(updateDelete);
-                  }}
-                >
-                  delete
-                </button>
-                <button
-                  className="btn-uncompleted"
-                  onClick={() => handleUncompleted(user)}
-                >
-                  unCompleted
-                </button>
-              </div>
-            );
-          })}
+          <p className="completedTitle"> შესრულებული დავალება</p>
+          {completed.map((user) => (
+            <UserItemCompleted
+              key={user.id}
+              name={user.name}
+              id={user.id}
+              actionRemove={handleRemoveUser}
+              completed={completed}
+              user={user}
+              handleUncompleted={handleUncompleted}
+            />
+          ))}
         </div>
       </div>
     </div>
